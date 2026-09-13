@@ -1,27 +1,31 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import Column, Integer, String
 
-from app.core.config import settings
-
-
-engine = create_engine(
-    settings.DATABASE_URL,
-    pool_pre_ping=True,
-)
-
-SessionLocal = sessionmaker(
-    bind=engine,
-    autoflush=False,
-    autocommit=False,
-)
-
-Base = declarative_base()
+from app.db.database import Base
 
 
-def get_db():
-    db = SessionLocal()
+class User(Base):
+    __tablename__ = "users"
 
-    try:
-        yield db
-    finally:
-        db.close()
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True,
+    )
+
+    username = Column(
+        String(100),
+        unique=True,
+        nullable=False,
+    )
+
+    email = Column(
+        String(255),
+        unique=True,
+        nullable=False,
+        index=True,
+    )
+
+    password_hash = Column(
+        String(255),
+        nullable=False,
+    )

@@ -11,3 +11,5 @@ pgvector
 alembic
 pytest
 httpx
+pydantic_settings
+psycopg2
