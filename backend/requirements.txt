@@ -11,5 +11,8 @@ pgvector
 alembic
 pytest
 httpx
-pydantic_settings
+pydantic
 psycopg2
+pgvector
+numpy
+sentence-transformers
